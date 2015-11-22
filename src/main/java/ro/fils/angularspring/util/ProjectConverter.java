@@ -62,7 +62,7 @@ public class ProjectConverter {
         return projects;
     }
 
-    public void getAllProjectsByTagValue(String xml, String tag, String value, String operator) {
+    public ArrayList<Project> getAllProjectsByTagValue(String xml, String tag, String value, String operator) {
         ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -82,6 +82,7 @@ public class ProjectConverter {
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
 
     public void getAllProjectsByBudgetDuration(String xml) {

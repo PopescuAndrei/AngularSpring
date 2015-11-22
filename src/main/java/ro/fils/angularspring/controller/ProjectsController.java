@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ro.fils.angularspring.repository.ProjectsDocumentRepository;
 import ro.fils.angularspring.util.ProjectConverter;
@@ -42,7 +43,7 @@ public class ProjectsController {
         }
         return project;
     }
-    
+
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public @ResponseBody
     ArrayList<Project> getAllProjects() {
@@ -57,5 +58,17 @@ public class ProjectsController {
         projectConverter = new ProjectConverter();
         return projectConverter.getAllCompleteProjects(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
 
+    }
+
+    @RequestMapping(value = "/getWithBudget", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getWithBudgetProjects(@RequestParam("budgetValue") String budgetValue, @RequestParam("operator") String operator) {
+        projectConverter = new ProjectConverter();
+        if (operator.equals("Greater")) {
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budgetValue, ">");
+        } else {
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budgetValue, "<");
+
+        }
     }
 }

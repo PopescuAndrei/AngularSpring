@@ -15,10 +15,6 @@ semApp.config(['$routeProvider',
                     templateUrl: 'views/projects.html',
                     controller: 'ProjectsListController'
                 })
-                .when('/completeprojects', {
-                    templateUrl: 'views/projects.html',
-                    controller: 'CompleteProjectsController'
-                })
                 .when('/projectslist/:projectId', {
                     templateUrl: 'views/projectview.html',
                     controller: 'ProjectViewController'
