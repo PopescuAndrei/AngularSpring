@@ -9,7 +9,7 @@ semApp.controller('ProjectsListController', ['$scope', '$http','$location',
                 });
 
          $scope.viewProject = function (projectId) {
-            $location.url('#/projectview' + projectId);
+            $location.url('/projectslist/' + projectId);
         };
         
     }]);
