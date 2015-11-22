@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ro.fils.semanticapp.model;
+package ro.fils.angularspring.domain;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author andre
  */
 public class Project {
-    
+
     private String id;
     private String title;
     private int budget;
@@ -35,8 +35,6 @@ public class Project {
         this.objective = objective;
         this.stages = stages;
     }
-    
-    
 
     public String getId() {
         return id;
@@ -104,8 +102,22 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", title=" + title + ", budget=" + budget + ", duration=" + duration + ", partners=" + partners + ", domain=" + domain + ", objective=" + objective + ", stages=" + stages + '}';
+        StringBuilder sB = new StringBuilder("<project><id>").append(id).append("</id><title>")
+                .append(title).append("</title><budget>")
+                .append(budget).append("</budget><duration>")
+                .append(duration).append("</duration><partners>");
+        for (Partner p : partners) {
+            sB.append(p.toString());
+        }
+        sB.append("</partners><domain>").append(domain).append("</domain><objective>")
+                .append(objective).append("</objective><stages>");
+        if (stages != null) {
+            for (Stage s : stages) {
+                sB.append(s.toString());
+            }
+        }
+        sB.append("</stages></project>");
+        return sB.toString();
     }
-    
-    
+
 }

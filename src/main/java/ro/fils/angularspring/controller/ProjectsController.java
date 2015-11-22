@@ -6,17 +6,19 @@
 package ro.fils.angularspring.controller;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ro.fils.angularspring.domain.Project;
+import ro.fils.angularspring.entity.ProjectsDocument;
 import ro.fils.angularspring.repository.ProjectsDocumentRepository;
 import ro.fils.angularspring.util.ProjectConverter;
-import ro.fils.semanticapp.model.Project;
-
 /**
  *
  * @author andre
@@ -24,7 +26,10 @@ import ro.fils.semanticapp.model.Project;
 @Controller
 @RequestMapping("/projects")
 public class ProjectsController {
-
+/*
+    CONNECTION STRINGS
+    
+    */
     private ProjectConverter projectConverter;
 
     @Autowired
@@ -52,6 +57,16 @@ public class ProjectsController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public @ResponseBody
+    Project insertProject(@RequestBody Project project) {
+        projectConverter = new ProjectConverter();
+        project.setId(UUID.randomUUID().toString());
+        String content = projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent();
+        projectsDocumentRepository.save(new ProjectsDocument("564f596becece47bba5ff133",projectConverter.insertProject(project, content),"projects"));
+        return project;
+    }
+    
     @RequestMapping(value = "/complete", method = RequestMethod.GET)
     public @ResponseBody
     ArrayList<Project> getAllCompleteProjects() {

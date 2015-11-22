@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ro.fils.semanticapp.model;
+package ro.fils.angularspring.domain;
 
 /**
  *
  * @author Vlad
  */
 public class Partner {
+
     private String name;
     private boolean leader;
 
@@ -21,8 +22,6 @@ public class Partner {
     public Partner() {
     }
 
-    
-    
     public String getName() {
         return name;
     }
@@ -41,8 +40,8 @@ public class Partner {
 
     @Override
     public String toString() {
-        return "Partner{" + "Name=" + name + ", Leader=" + leader + '}';
+        return "<partner><name>" + name
+                + "</name><leader>" + leader + "</leader></partner>";
     }
-    
-    
+
 }

@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ro.fils.angularspring.domain.User;
 import ro.fils.angularspring.entity.UsersDocument;
 import ro.fils.angularspring.repository.UsersDocumentRepository;
 import ro.fils.angularspring.util.UserConverter;
-import ro.fils.semanticapp.model.User;
 
 /**
  *

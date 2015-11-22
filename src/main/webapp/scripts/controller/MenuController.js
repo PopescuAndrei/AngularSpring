@@ -16,7 +16,7 @@ semApp.controller('MenuController', ['$scope', function ($scope) {
             show: true
         },
         {
-            label: 'Submit Project',
+            label: 'Another Project',
             url: '/AngularSpring/#/addproject',
             show: true
         },

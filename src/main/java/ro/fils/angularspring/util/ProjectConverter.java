@@ -28,9 +28,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import ro.fils.semanticapp.model.Partner;
-import ro.fils.semanticapp.model.Project;
-import ro.fils.semanticapp.model.Stage;
+import ro.fils.angularspring.domain.Partner;
+import ro.fils.angularspring.domain.Project;
+import ro.fils.angularspring.domain.Stage;
 
 /**
  *
@@ -172,7 +172,6 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -248,7 +247,7 @@ public class ProjectConverter {
         }
         return projects;
     }
-        
+
     public Project parseProject(Node node) {
         Project project = null;
         if (node instanceof Element) {
@@ -346,5 +345,23 @@ public class ProjectConverter {
             }
         }
         return project;
+    }
+
+    public String insertProject(Project project, String xml) {
+        ArrayList<Project> projects = readAll(xml);
+        String s = null;
+        projects.add(project);
+        s = writeProjectInXml(projects);
+        return s;
+    }
+
+    public String writeProjectInXml(ArrayList<Project> projects) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<projects>");
+        for (Project p : projects) {
+            stringBuilder.append(p.toString());
+        }
+        stringBuilder.append("</projects>");
+        return stringBuilder.toString();
     }
 }

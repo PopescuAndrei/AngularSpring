@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ro.fils.semanticapp.model;
+package ro.fils.angularspring.domain;
 
 /**
  *
  * @author Vlad
  */
 public class Stage {
+
     private String name;
     private int duration;
     private String description;
@@ -22,7 +23,6 @@ public class Stage {
 
     public Stage() {
     }
-    
 
     public String getName() {
         return name;
@@ -50,8 +50,9 @@ public class Stage {
 
     @Override
     public String toString() {
-        return "Stage{" + "name=" + name + ", duration=" + duration + ", description=" + description + '}';
+        return "<stage><name>" + name
+                + "</name><duration>" + duration + "</duration>"
+                + "<description>" + description + "</description></stage>";
     }
-    
-    
+
 }

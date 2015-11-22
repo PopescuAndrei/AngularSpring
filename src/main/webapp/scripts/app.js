@@ -19,6 +19,10 @@ semApp.config(['$routeProvider',
                     templateUrl: 'views/projectview.html',
                     controller: 'ProjectViewController'
                 })
+                .when('/addProject', {
+                    templateUrl: 'views/projectadd.html',
+                    controller: 'ProjectAddController'
+                })
                 .otherwise({
                     templateUrl: 'views/home.html',
                     controller: 'HomeController'
