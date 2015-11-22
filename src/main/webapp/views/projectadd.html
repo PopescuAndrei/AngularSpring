@@ -1,7 +1,69 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">Add New Project: </h2>
+    </div>
+    <div class="panel-body">
+        <div class="row" id="paddingForDiv">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                 <div><h3>Project Details</h3></div>
+                <div class="row">
+                        <div class="form-group">
+                            <label for="title">Title :</label>
+                            <input type="text"  name="InputTitle" id="InputTitle" placeholder="Enter Title" required>
+                        </div>
+                </div>
+                <div class="row"> 
+                        <div class="form-group">
+                            <label for="budget">Budget :</label>
+                            <input type="number"  name="InputBudget" id="InputBudget" placeholder="Enter Budget" required>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="form-group">
+                            <label for="duration">Duration:</label>
+                            <input type="number"  name="InputDuration" id="InputDuration" placeholder="Enter Duration" required>
+                        </div>
+                </div>
+                 <div class="row">              
+                        <div class="form-group">
+                            <label for="domain">Domain:</label>
+                            <input type="text"  name="InputDomain" id="InputDoamin" placeholder="Enter Domain" required>
+                        </div>
+                 </div>   
+                 <div class="row">                   
+                        <div class="form-group">
+                            <label for="objective">Objective:</label>
+                            <input type="text"  name="InputObjective" id="InputObjective" placeholder="Enter Objective" required>
+                        </div>                 
+                 </div>
+                </div>
+            <div class="col-lg-2"></div>
+                <div class="col-lg-4">                    
+                             <div><h3>Project Partners</h3></div>
+                       	<input type="submit" name="submit" id="submit" value="Add New Partner" class="btn btn-info" >
+                   
+                </div>
+          
+            <div class="col-lg-1"></div>
+                            
+            </div>
+        
+              <div class="row">
+                  <div class="col-lg-1"></div>
+                   <div class="col-lg-4">                    
+                        <div><h3>Project Stages</h3></div>
+                            <input type="submit" name="submit" id="submit" value="Add New Stage" class="btn btn-info">              
+                   </div>        
+            </div>
+                <div class="row">
+                 
+                    <div class="col-md-5"></div>
+                    <div class="col-md-7">
+                        <div class="container">
+                            <button class="btn btn-default" ng-click="back()">Back</button>
+                        </div>
+                    </div>
+                </div>
+        
+        </div>
