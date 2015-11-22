@@ -34,7 +34,7 @@ public class ProjectsController {
     public @ResponseBody
     Project getOneProject(@PathVariable("projectId") String projectId) {
         projectConverter = new ProjectConverter();
-        ArrayList<Project> projects = projectConverter.readAll(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+        ArrayList<Project> projects = projectConverter.readAll(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
         Project project = null;
         for (Project p : projects) {
             if (projectId.equals(p.getId())) {
@@ -48,7 +48,7 @@ public class ProjectsController {
     public @ResponseBody
     ArrayList<Project> getAllProjects() {
         projectConverter = new ProjectConverter();
-        return projectConverter.readAll(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+        return projectConverter.readAll(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
 
     }
 
@@ -56,7 +56,7 @@ public class ProjectsController {
     public @ResponseBody
     ArrayList<Project> getAllCompleteProjects() {
         projectConverter = new ProjectConverter();
-        return projectConverter.getAllCompleteProjects(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+        return projectConverter.getAllCompleteProjects(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
 
     }
 

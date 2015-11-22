@@ -3,30 +3,85 @@
         <h2 class="panel-title">View Project:  <b>{{project.title}}</b></h2>
     </div>
     <div class="panel-body">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="budget">Budget :</label>
-                        <span id="budget" class="form-control">{{project.budget}}</span>
-                    </div>
+        <div class="row" id="paddingForDiv">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                 <div><h3>Project Details</h3></div>
+                <div class="row">
+                        <div class="form-group">
+                            <label for="title">Budget :</label>
+                            <span id="title" class="form-control">{{project.title}}</span>
+                        </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="duration">Duration:</label>
-                        <span id="duration" class="form-control">{{project.duration}}</span>
-                    </div>
+                <div class="row"> 
+                        <div class="form-group">
+                            <label for="budget">Budget :</label>
+                            <span id="budget" class="form-control">{{project.budget}}</span>
+                        </div>
                 </div>
+                <div class="row">
+                        <div class="form-group">
+                            <label for="duration">Duration:</label>
+                            <span id="duration" class="form-control">{{project.duration}}</span>
+                        </div>
+                </div>
+                 <div class="row">              
+                        <div class="form-group">
+                            <label for="domain">Domain:</label>
+                            <span id="domain" class="form-control">{{project.domain}}</span>
+                        </div>
+                 </div>   
+                 <div class="row">                   
+                        <div class="form-group">
+                            <label for="objective">Objective:</label>
+                            <span id="objective" class="form-control">{{project.objective}}</span>
+                        </div>                 
+                 </div>
+                </div>
+            <div class="col-lg-2"></div>
+                <div class="col-lg-4">                    
+                             <div><h3>Project Partners</h3></div>
+                        <div class="row" ng-repeat="partner in project.partners">                           
+                                <div class="form-group">
+                                    <label for="name">Name :</label>
+                                    <span class="glyphicon glyphicon-asterisk" ng-if="partner.leader===true"></span><span id="name" class="form-control">{{partner.name}}</span>
+                                </div>                           
+                        </div>                   
+                </div>
+          
+            <div class="col-lg-1"></div>
+                            
             </div>
-            
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-7">
-                    <div class="container">
-                        <button class="btn btn-default" ng-click="back()">Back</button>
+        
+              <div class="row">
+                  <div class="col-lg-1"></div>
+                   <div class="col-lg-4">                    
+                        <div><h3>Project Stages</h3></div>
+                        <div class="row" ng-repeat="stage in project.stages">                           
+                                <div class="form-group">
+                                  <label for="name">Stage :</label>
+                                    <span id="name" class="form-control">{{stage.name}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="duration">Duration :</label>
+                                    <span id="duration" class="form-control">{{stage.duration}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description :</label>
+                                    <span id="description" class="form-control">{{stage.description}}</span>
+                                </div> 
+                            </br>
+                        </div>                   
+                   </div>        
+            </div>
+                <div class="row">
+                 
+                    <div class="col-md-5"></div>
+                    <div class="col-md-7">
+                        <div class="container">
+                            <button class="btn btn-default" ng-click="back()">Back</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-    </div>
-</div>
+        
+        </div>
