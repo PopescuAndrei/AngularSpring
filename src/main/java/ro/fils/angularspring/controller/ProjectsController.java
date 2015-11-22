@@ -34,7 +34,7 @@ public class ProjectsController {
     public @ResponseBody
     Project getOneProject(@PathVariable("projectId") String projectId) {
         projectConverter = new ProjectConverter();
-        ArrayList<Project> projects = projectConverter.readAll(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
+        ArrayList<Project> projects = projectConverter.readAll(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
         Project project = null;
         for (Project p : projects) {
             if (projectId.equals(p.getId())) {
@@ -48,7 +48,7 @@ public class ProjectsController {
     public @ResponseBody
     ArrayList<Project> getAllProjects() {
         projectConverter = new ProjectConverter();
-        return projectConverter.readAll(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
+        return projectConverter.readAll(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
 
     }
 
@@ -56,19 +56,71 @@ public class ProjectsController {
     public @ResponseBody
     ArrayList<Project> getAllCompleteProjects() {
         projectConverter = new ProjectConverter();
-        return projectConverter.getAllCompleteProjects(projectsDocumentRepository.findOne("564f6de7c7897eea2b1fa18d").getContent());
+        return projectConverter.getAllCompleteProjects(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
 
     }
 
     @RequestMapping(value = "/getWithBudget", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<Project> getWithBudgetProjects(@RequestParam("budgetValue") String budgetValue, @RequestParam("operator") String operator) {
+    ArrayList<Project> getWithBudgetProjects(@RequestParam("budget") String budget, @RequestParam("operator") String operator) {
         projectConverter = new ProjectConverter();
         if (operator.equals("Greater")) {
-            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budgetValue, ">");
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budget, ">");
         } else {
-            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budgetValue, "<");
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "budget", budget, "<");
 
         }
+    }
+
+    @RequestMapping(value = "/getWithDuration", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getWithDuration(@RequestParam("duration") String duration, @RequestParam("operator") String operator) {
+        projectConverter = new ProjectConverter();
+        if (operator.equals("Greater")) {
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "duration", duration, ">");
+        } else {
+            return projectConverter.getAllProjectsByTagValue(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent(), "duration", duration, "<");
+
+        }
+    }
+
+    @RequestMapping(value = "/getWithBudgetDuration", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getWithBudgetDuration() {
+        projectConverter = new ProjectConverter();
+        return projectConverter.getAllProjectsByBudgetDuration(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+
+    }
+
+    @RequestMapping(value = "/getProjectsMorePartners", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getProjectsMorePartners() {
+        projectConverter = new ProjectConverter();
+        return projectConverter.getAllProjectsByPartnerNo(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+
+    }
+
+    @RequestMapping(value = "/getProjectsWorkingPackages", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getProjectsWorkingPackages() {
+        projectConverter = new ProjectConverter();
+        return projectConverter.getAllProjectsByStagesNo(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+
+    }
+
+    @RequestMapping(value = "/getSumProjects", method = RequestMethod.GET)
+    public @ResponseBody
+    Double getSumProjects() {
+        projectConverter = new ProjectConverter();
+        return projectConverter.getBudgetSum(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+
+    }
+
+    @RequestMapping(value = "/getNoPmProjects", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<Project> getNoPMProjects() {
+        projectConverter = new ProjectConverter();
+        return projectConverter.getAllProjectsWithNoPM(projectsDocumentRepository.findOne("564f596becece47bba5ff133").getContent());
+
     }
 }

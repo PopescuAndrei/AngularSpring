@@ -8,9 +8,7 @@ package ro.fils.angularspring.controller;
 import java.util.ArrayList;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +34,7 @@ public class UsersController {
     public @ResponseBody
     ArrayList<User> getAllUsers() {
         userConverter = new UserConverter();
-        return userConverter.readAllUsers(usersDocumentRepository.findOne("564f6df7c7897eea2b1fa18e").getContent());
+        return userConverter.readAllUsers(usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent());
 
     }
 
@@ -46,8 +44,8 @@ public class UsersController {
     User insertUser(@RequestBody User user) {
         userConverter = new UserConverter();
         user.setId(UUID.randomUUID().toString());
-        String content = usersDocumentRepository.findOne("564f6df7c7897eea2b1fa18e").getContent();
-        usersDocumentRepository.save(new UsersDocument("564f6df7c7897eea2b1fa18e",userConverter.insertUser(user, content),"users"));
+        String content = usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent();
+        usersDocumentRepository.save(new UsersDocument("564f441aecece47bba5ff132",userConverter.insertUser(user, content),"users"));
         return user;
     }
     

@@ -77,7 +77,7 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
+                projects.add(p);
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +85,7 @@ public class ProjectConverter {
         return projects;
     }
 
-    public void getAllProjectsByBudgetDuration(String xml) {
+    public ArrayList<Project> getAllProjectsByBudgetDuration(String xml) {
         ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -100,14 +100,15 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
+                projects.add(p);
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
 
-    public void getAllProjectsByPartnerNo(String xml) {
+    public ArrayList<Project> getAllProjectsByPartnerNo(String xml) {
         ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -123,14 +124,15 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
+                projects.add(p);
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
 
-    public void getAllProjectsByStagesNo(String xml) {
+    public ArrayList<Project> getAllProjectsByStagesNo(String xml) {
         ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -146,14 +148,15 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
+                projects.add(p);
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
 
-    public void getAllProjectsByStagesNoZero(String xml) {
+    public ArrayList<Project> getAllProjectsByStagesNoZero(String xml) {
         ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -174,10 +177,11 @@ public class ProjectConverter {
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
-    
-    public ArrayList<Project> getAllCompleteProjects(String xml){
-      ArrayList<Project> projects = new ArrayList<>();
+
+    public ArrayList<Project> getAllCompleteProjects(String xml) {
+        ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         Document document;
@@ -192,7 +196,7 @@ public class ProjectConverter {
             NodeList nodes = (NodeList) result;
             for (int i = 0; i < nodes.getLength(); i++) {
                 Project p = parseProject(nodes.item(i));
-                System.out.println(p.toString());
+                projects.add(p);
             }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,8 +204,29 @@ public class ProjectConverter {
         return projects;
     }
 
-       public void getBudgetSum(String xml){
-      ArrayList<Project> projects = new ArrayList<>();
+    public double getBudgetSum(String xml) {
+        ArrayList<Project> projects = new ArrayList<>();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        Document document;
+        double sum = 0;
+        try {
+            builder = factory.newDocumentBuilder();
+            document = builder.parse(new InputSource(new StringReader(xml)));
+            XPathFactory xPathFactory = XPathFactory.newInstance();
+            XPath xpath = xPathFactory.newXPath();
+            XPathExpression expr = xpath.compile("sum(/projects/project/budget)");
+
+            Double result = (Double) expr.evaluate(document, XPathConstants.NUMBER);
+            sum = result;
+        } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
+            Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sum;
+    }
+
+    public ArrayList<Project> getAllProjectsWithNoPM(String xml) {
+        ArrayList<Project> projects = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         Document document;
@@ -210,15 +235,20 @@ public class ProjectConverter {
             document = builder.parse(new InputSource(new StringReader(xml)));
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xpath = xPathFactory.newXPath();
-            XPathExpression expr = xpath.compile("sum(/projects/project/budget)");
+            XPathExpression expr = xpath.compile("/projects/project[stages/stage/name/text() != 'Project Management']");
 
-            Double result = (Double)expr.evaluate(document, XPathConstants.NUMBER);
-            System.out.println(result.intValue());
+            Object result = expr.evaluate(document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) result;
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Project p = parseProject(nodes.item(i));
+                projects.add(p);
+            }
         } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return projects;
     }
-    
+        
     public Project parseProject(Node node) {
         Project project = null;
         if (node instanceof Element) {
@@ -256,7 +286,7 @@ public class ProjectConverter {
                                     Partner partner = null;
                                     if (partnerNode instanceof Element) {
                                         partner = new Partner();
-                                    //NodeList partnerChildNodes = partnerNode.getChildNodes();
+                                        //NodeList partnerChildNodes = partnerNode.getChildNodes();
 
                                         partner.setName(partnerNode.getChildNodes().item(0).getTextContent().trim());
                                         partner.setLeader(Boolean.parseBoolean(partnerNode.getChildNodes().item(1).getTextContent().trim()));

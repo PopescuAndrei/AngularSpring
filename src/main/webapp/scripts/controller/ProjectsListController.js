@@ -3,48 +3,95 @@ semApp.controller('ProjectsListController', ['$scope', '$http', '$location', '$r
 
         $scope.projects = [];
         $scope.domain = '';
-        $scope.budget = '';
+        $scope.budget = undefined;
         $scope.duration = '';
+        $scope.sum = undefined;
         $scope.checkbox = undefined;
+
         $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/all', method: 'GET'}).
                 success(function (data) {
                     $scope.projects = data;
                 });
+                
+                
         $scope.viewProject = function (projectId) {
             $location.url('/projectslist/' + projectId);
         };
+
         $scope.getAllProjects = function () {
             return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/all', method: 'GET'}).
                     success(function (data) {
                         $scope.projects = data;
                     });
         };
+
         $scope.getCompleteProjects = function () {
             return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/complete', method: 'GET'}).
                     success(function (data) {
                         $scope.projects = data;
                     });
         };
-        $scope.getAllProjects = function () {
-            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/all', method: 'GET'}).
-                    success(function (data) {
-                        $scope.projects = data;
-                    });
-        };
+
         $scope.getAllProjectsWithBudget = function () {
             if ($scope.checkbox === 'Greater') {
-                console.log($scope.checkbox.value());
-                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithBudget', method: 'GET', data: {'budgetValue': $scope.budget, 'operator': 'Greater'}})
+                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithBudget', method: 'GET', params: {'budget': $scope.budget, 'operator': 'Greater'}})
                         .success(function (data) {
                             $scope.projects = data;
                         });
             } else {
-                console.log($scope.checkbox);
-                console.log($scope.budgetValue);
-                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithBudget', method: 'GET', data: {'budgetValue': $scope.budget, 'operator': 'Lower'}})
+                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithBudget', method: 'GET', params: {'budget': $scope.budget, 'operator': 'Lower'}})
                         .success(function (data) {
                             $scope.projects = data;
                         });
             }
+        };
+
+        $scope.getAllProjectsWithDuration = function () {
+            if ($scope.checkbox === 'Greater') {
+                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithDuration', method: 'GET', params: {'duration': $scope.budget, 'operator': 'Greater'}})
+                        .success(function (data) {
+                            $scope.projects = data;
+                        });
+            } else {
+                return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithDuration', method: 'GET', params: {'duration': $scope.budget, 'operator': 'Lower'}})
+                        .success(function (data) {
+                            $scope.projects = data;
+                        });
+            }
+        };
+
+        $scope.getProjectsBudgetDuration = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getWithBudgetDuration', method: 'GET'}).
+                    success(function (data) {
+                        $scope.projects = data;
+                    });
+        };
+
+        $scope.getProjectsMorePartners = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getProjectsMorePartners', method: 'GET'}).
+                    success(function (data) {
+                        $scope.projects = data;
+                    });
+        };
+
+        $scope.getProjectsWorkingPackages = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getProjectsWorkingPackages', method: 'GET'}).
+                    success(function (data) {
+                        $scope.projects = data;
+                    });
+        };
+
+        $scope.getSumProjects = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getSumProjects', method: 'GET'}).
+                    success(function (data) {
+                        $scope.sum = data;
+                    });
+        };
+
+        $scope.getNoPmProjects = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getNoPmProjects', method: 'GET'}).
+                    success(function (data) {
+                        $scope.projects = data;
+                    });
         };
     }]);

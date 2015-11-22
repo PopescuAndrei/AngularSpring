@@ -1,7 +1,15 @@
-<a class="btn btn-primary btn-log" role="button" ng-click="getCompleteProjects()">Complete Projects</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getAllProjects()">All Projects</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getAllProjectsWithBudget()">Budget</a>
-<input type="number" ng-bind="budget"/>
+<a class="btn btn-primary btn-log" role="button" ng-click="getAllProjectsWithDuration()">Duration</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getProjectsBudgetDuration()">Budget & Duration</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getProjectsMorePartners()">More Partners</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getProjectsWorkingPackages()">Working Packages</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getSumProjects()">Total Sum</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getNoPmProjects()">Projects without PM</a>
+
+<a class="btn btn-primary btn-log" role="button" ng-click="getCompleteProjects()">Complete Projects</a>
+
+<input type="number" ng-model="budget"/>
 <div class="container">
     <span class="col-md-3"><input type="radio" value="Greater" ng-model="checkbox" name="radio" class="radio">Greater</span>
     <span class="col-md-3"><input type="radio" value="Lower" ng-model="checkbox" name="radio" class="radio">Lower</span>
