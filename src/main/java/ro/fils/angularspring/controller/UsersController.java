@@ -36,7 +36,7 @@ public class UsersController {
     public @ResponseBody
     ArrayList<User> getAllUsers() {
         userConverter = new UserConverter();
-        return userConverter.readAllUsers(usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent());
+        return userConverter.readAllUsers(usersDocumentRepository.findOne("564f6df7c7897eea2b1fa18e").getContent());
 
     }
 
@@ -46,8 +46,8 @@ public class UsersController {
     User insertUser(@RequestBody User user) {
         userConverter = new UserConverter();
         user.setId(UUID.randomUUID().toString());
-        String content = usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent();
-        usersDocumentRepository.save(new UsersDocument("564f441aecece47bba5ff132",userConverter.insertUser(user, content),"users"));
+        String content = usersDocumentRepository.findOne("564f6df7c7897eea2b1fa18e").getContent();
+        usersDocumentRepository.save(new UsersDocument("564f6df7c7897eea2b1fa18e",userConverter.insertUser(user, content),"users"));
         return user;
     }
     
