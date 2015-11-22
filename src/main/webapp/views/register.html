@@ -1,0 +1,54 @@
+<div class="panel-heading">
+    <h2 class="panel-title">Register new account</h2>
+</div>
+
+<form>
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input id="username" name="username" type="text" class="form-control" placeholder="Username: " ng-model="user.username" required />
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input id="password" name="password" type="password" class="form-control" placeholder="Password: " ng-model="user.password" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First Name: " ng-model="user.firstName" required />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last Name: " ng-model="user.lastName" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="mail">Email:</label>
+                    <input id="mail" name="mail" type="text" class="form-control" placeholder="Mail Address: " ng-model="user.mail" required />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="container">
+                        <span class="col-lg-3"><a class="btn btn-primary btn-lg" role="button" ng-click="create(user)" ng-disabled="registerForm.$invalid">Save</a></span>
+                        <span class="col-lg-3"><a class="btn btn-default btn-lg" role="button" ng-click="reset()">Reset</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

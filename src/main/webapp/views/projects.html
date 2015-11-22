@@ -1,0 +1,30 @@
+<table class="table table-responsive table-hover">
+    <tr>
+        <th class="text-center">Title</th>
+        <th class="text-center">Budget</th>
+        <th class="text-center">Duration</th>
+        <th class="text-center">Domain</th>
+        <th class="text-center">Objective</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="project in projects">
+        <td class="text-center">
+            {{project.title}}
+        </td>
+        <td class="text-center">
+            {{project.budget}}
+        </td>
+        <td class="text-center">
+            {{project.duration}}
+        </td>
+        <td class="text-center">
+            {{project.domain}}
+        </td>
+        <td class="text-center">
+            {{project.objective}}
+        </td>
+        <td class="text-center">
+            <a class="btn btn-primary btn-log" role="button" ng-click="viewProject(project.id)">View</a>
+        </td>
+    </tr>
+</table>

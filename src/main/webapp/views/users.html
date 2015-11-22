@@ -1,0 +1,22 @@
+<table class="table table-responsive table-hover">
+    <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">First Name</th>
+        <th class="text-center">Last Name</th>
+        <th class="text-center">Email</th>
+    </tr>
+    <tr ng-repeat="user in users">
+        <td class="text-center">
+            {{user.id}}
+        </td>
+        <td class="text-center">
+            {{user.firstName}}
+        </td>
+        <td class="text-center">
+            {{user.lastName}}
+        </td>
+        <td class="text-center">
+            {{user.mail}}
+        </td>
+    </tr>
+</table>
