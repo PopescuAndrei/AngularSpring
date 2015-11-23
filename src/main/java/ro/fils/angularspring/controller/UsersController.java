@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ro.fils.angularspring.domain.User;
 import ro.fils.angularspring.entity.UsersDocument;
 import ro.fils.angularspring.repository.UsersDocumentRepository;
+import ro.fils.angularspring.util.ConnectionUtils;
 import ro.fils.angularspring.util.UserConverter;
 
 /**
@@ -34,7 +36,7 @@ public class UsersController {
     public @ResponseBody
     ArrayList<User> getAllUsers() {
         userConverter = new UserConverter();
-        return userConverter.readAllUsers(usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent());
+        return userConverter.readAllUsers(usersDocumentRepository.findOne(ConnectionUtils.USERS_COLLECTION).getContent());
 
     }
 
@@ -44,17 +46,25 @@ public class UsersController {
     User insertUser(@RequestBody User user) {
         userConverter = new UserConverter();
         user.setId(UUID.randomUUID().toString());
-        String content = usersDocumentRepository.findOne("564f441aecece47bba5ff132").getContent();
-        usersDocumentRepository.save(new UsersDocument("564f441aecece47bba5ff132",userConverter.insertUser(user, content),"users"));
+        String content = usersDocumentRepository.findOne(ConnectionUtils.USERS_COLLECTION).getContent();
+        usersDocumentRepository.save(new UsersDocument(ConnectionUtils.USERS_COLLECTION,userConverter.insertUser(user, content),"users"));
         return user;
     }
     
-//    @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
-//    public
-//    @ResponseBody
-//    User getOneUser(@PathVariable("userId") String userId) {
-//        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
-//        return departmentService.getDepartment(departmentId);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
+    public
+    @ResponseBody
+    User loginUser(@RequestParam("mail") String mail,@RequestParam("password") String password) {
+        userConverter = new UserConverter();
+        String content = usersDocumentRepository.findOne(ConnectionUtils.USERS_COLLECTION).getContent();
+        ArrayList<User> users = userConverter.readAllUsers(content);
+        User user = null;
+        for(User u: users){
+            if(u.getMail().equals(mail) && u.getPassword().equals(password)){
+                user = u;
+            }
+        }
+        return user;
+    }
     
 }

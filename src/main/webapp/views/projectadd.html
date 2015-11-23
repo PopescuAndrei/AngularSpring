@@ -1,7 +1,8 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2 class="panel-title">Add New Project: </h2>
-    </div>
+<div class="panel-heading">
+    <h2 class="panel-title">Add new project</h2>
+</div>
+
+<form>
     <div class="panel-body">
         <div class="row" id="paddingForDiv">
             <div class="col-lg-1"></div>
@@ -53,7 +54,7 @@
                             <input id="leader" name="leader" type="text" class="form-control" placeholder="Leader: " ng-model="partner.leader" required />
                         </div>                 
                     </div>
-                    <span class="col-lg-3"><a class="btn btn-default btn-lg" role="button" ng-click="addPartner()">Add Partner</a></span>
+                    <span class="col-lg-3"><a class="btn btn-default btn-xd" role="button" ng-click="addPartner()">Add Partner</a></span>
                 </div>
                 <div class="row"><h3>Project Stages</h3>
                     <div class="row">              
@@ -74,7 +75,7 @@
                             <input id="description" name="description" type="text" class="form-control" placeholder="Stage Description: " ng-model="stage.description" required />
                         </div>                 
                     </div>
-                    <span class="col-lg-3"><a class="btn btn-default btn-lg" role="button" ng-click="addStage()">Add Stage</a></span>
+                    <span class="col-lg-3"><a class="btn btn-default btn-xd" role="button" ng-click="addStage()">Add Stage</a></span>
                 </div>
             </div>
 
@@ -82,11 +83,12 @@
 
         </div>
         <div class="row">
-
-            <div class="col-md-12">
-                <button class="btn btn-default" ng-click="back()">Back</button>
+            <div class="form-group">
+                <div class="container">
+                    <span class="col-lg-3"><a class="btn btn-primary btn-xd" role="button" ng-click="create(project)" ng-disabled="projectForm.$invalid">Save</a></span>
+                    <span class="col-lg-3"><a class="btn btn-default btn-xd" role="button" ng-click="reset()">Reset</a></span>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
+</form>

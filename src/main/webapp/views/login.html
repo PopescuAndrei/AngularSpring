@@ -1,16 +1,32 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="panel-heading">
+    <h2 class="panel-title">Login</h2>
+</div>
+
+<form>
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="mail">Email: </label>
+                    <input id="mail" name="mail" type="text" class="form-control" placeholder="Mail: " ng-model="mail" required />
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input id="password" name="password" type="password" class="form-control" placeholder="Password: " ng-model="password" required />
+                </div>
+            </div>
+        </div><div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="container">
+                        <span class="col-lg-3"><a class="btn btn-primary btn-lg" role="button" ng-click="create(mail,password)" ng-disabled="loginForm.$invalid">Save</a></span>
+                        <span class="col-lg-3"><a class="btn btn-default btn-lg" role="button" ng-click="reset()">Reset</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

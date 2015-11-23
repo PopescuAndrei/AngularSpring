@@ -15,6 +15,7 @@
                 <li ng-repeat="action in actionsList" ng-show="action.show===true"><a href="{{action.url}}">{{action.label}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a class="btn btn-default btn-lg" role="button" ng-click="logout()">Logout</a></li>
                 <li><a>Date: {{currentDate | date:'yyyy-MM-dd'}}</a></li>
             </ul>
         </div>

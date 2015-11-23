@@ -142,7 +142,7 @@ public class ProjectConverter {
             document = builder.parse(new InputSource(new StringReader(xml)));
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xpath = xPathFactory.newXPath();
-            XPathExpression expr = xpath.compile("/projects/project[count(partners/partner)>2] and count[(partners/partner)<6]");
+            XPathExpression expr = xpath.compile("/projects/project[count(stages/stage)>2 and count(stages/stage)<6]");
 
             Object result = expr.evaluate(document, XPathConstants.NODESET);
             NodeList nodes = (NodeList) result;
@@ -246,6 +246,25 @@ public class ProjectConverter {
             Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projects;
+    }
+
+    public Double getExcessBudgetSum(String xml) {
+        int totalBudget = 150000000;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        Document document;
+        Double result = null;
+        try {
+            builder = factory.newDocumentBuilder();
+            document = builder.parse(new InputSource(new StringReader(xml)));
+            XPathFactory xPathFactory = XPathFactory.newInstance();
+            XPath xpath = xPathFactory.newXPath();
+            XPathExpression expr = xpath.compile("sum(/projects/project/budget)");
+            result = totalBudget - (Double) expr.evaluate(document, XPathConstants.NUMBER);
+        } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException ex) {
+            Logger.getLogger(ProjectConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public Project parseProject(Node node) {

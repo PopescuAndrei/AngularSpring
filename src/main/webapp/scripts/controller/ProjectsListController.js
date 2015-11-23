@@ -6,14 +6,15 @@ semApp.controller('ProjectsListController', ['$scope', '$http', '$location', '$r
         $scope.budget = undefined;
         $scope.duration = '';
         $scope.sum = undefined;
+        $scope.excess = undefined;
         $scope.checkbox = undefined;
 
         $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/all', method: 'GET'}).
                 success(function (data) {
                     $scope.projects = data;
                 });
-                
-                
+
+
         $scope.viewProject = function (projectId) {
             $location.url('/projectslist/' + projectId);
         };
@@ -88,8 +89,22 @@ semApp.controller('ProjectsListController', ['$scope', '$http', '$location', '$r
                     });
         };
 
+        $scope.getExcess = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getExcess', method: 'GET'}).
+                    success(function (data) {
+                        $scope.excess = data;
+                    });
+        };
+
         $scope.getNoPmProjects = function () {
             return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/getNoPmProjects', method: 'GET'}).
+                    success(function (data) {
+                        $scope.projects = data;
+                    });
+        };
+
+        $scope.getAllProjectsWithDomain = function () {
+            return $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/domain?domain=' + $scope.domain, method: 'GET'}).
                     success(function (data) {
                         $scope.projects = data;
                     });

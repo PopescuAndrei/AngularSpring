@@ -1,18 +1,21 @@
 <a class="btn btn-primary btn-log" role="button" ng-click="getAllProjects()">All Projects</a>
+<a class="btn btn-primary btn-log" role="button" ng-click="getAllProjectsWithDomain()">Domain</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getAllProjectsWithBudget()">Budget</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getAllProjectsWithDuration()">Duration</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getProjectsBudgetDuration()">Budget & Duration</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getProjectsMorePartners()">More Partners</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getProjectsWorkingPackages()">Working Packages</a>
-<a class="btn btn-primary btn-log" role="button" ng-click="getSumProjects()">Total Sum</a>
 <a class="btn btn-primary btn-log" role="button" ng-click="getNoPmProjects()">Projects without PM</a>
-
 <a class="btn btn-primary btn-log" role="button" ng-click="getCompleteProjects()">Complete Projects</a>
 
-<input type="number" ng-model="budget"/>
 <div class="container">
-    <span class="col-md-3"><input type="radio" value="Greater" ng-model="checkbox" name="radio" class="radio">Greater</span>
-    <span class="col-md-3"><input type="radio" value="Lower" ng-model="checkbox" name="radio" class="radio">Lower</span>
+    <div class="row" style="padding-top: 10px;padding-bottom: 10px">
+        <span class="col-md-4">Value for duration/budget<input type="number" ng-model="budget" style="padding-right: 5px;padding-left: "/></span>
+        <span class="col-md-1"><input type="radio" value="Greater" ng-model="checkbox" name="radio" class="radio">Greater</span>
+        <span class="col-md-1"><input type="radio" value="Lower" ng-model="checkbox" name="radio" class="radio">Lower</span>
+        <span class="col-md-4">Value for domain/budget<input type="text" ng-model="domain" style="padding-right: 5px;padding-left: "/></span>
+        
+    </div>
 </div>
 <table class="table table-responsive table-hover">
     <tr>
@@ -43,4 +46,10 @@
             <a class="btn btn-primary btn-log" role="button" ng-click="viewProject(project.id)">View</a>
         </td>
     </tr>
+
 </table>
+<a class="btn btn-primary btn-log" role="button" ng-click="getSumProjects()">Compute Total Sum</a> <span> Total sum is: {{sum}} </span>
+<a class="btn btn-primary btn-log" role="button" ng-click="getExcess()">Compute Excess Sum</a> <span> Excess sum is: {{excess}} </span>
+<a class="btn btn-primary btn-log" role="button" href="http://localhost:8080/AngularSpring/mvc/projects/downloadPDF">Download PDF</a>
+<a class="btn btn-primary btn-log" role="button" href="http://localhost:8080/AngularSpring/mvc/projects/downloadXML">Download XML</a>
+<a class="btn btn-primary btn-log" role="button" href="http://localhost:8080/AngularSpring/mvc/projects/downloadXSLT">Download XSLT</a>

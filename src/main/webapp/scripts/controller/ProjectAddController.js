@@ -11,6 +11,8 @@ semApp.controller('ProjectAddController', ['$scope', '$http','$location',
             stages:[]
         };
         
+        $scope.message = '';
+        
         $scope.partner = {
             name:"",
             leader:undefined
@@ -34,7 +36,6 @@ semApp.controller('ProjectAddController', ['$scope', '$http','$location',
         };
         
         $scope.reset = function () {
-            console.log($scope.project);
             $scope.user = {};
         };
 
@@ -42,7 +43,8 @@ semApp.controller('ProjectAddController', ['$scope', '$http','$location',
             $http({url: 'http://localhost:8080/AngularSpring/mvc/projects/', method: 'POST', data: addProject, headers: {'Content-Type': 'application/json'}}).
                     success(function (data) {
                         $scope.project = data;
-                        $location.url('/AngularSpring/#/home');
+                        $scope.message = "Saved Succesfull";
                     });
         };
+        
     }]);
