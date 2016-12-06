@@ -1,6 +1,7 @@
 ## Semantic Web Project
 
 The project uses:
+
 1. JDK 1.8
 2. Maven
 3. Hibernate
